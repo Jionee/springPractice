@@ -10,11 +10,22 @@ import hello.core.order.OrderServiceImpl;
 //공연 기획자의 역할
 //생성자 주입
 public class AppConfig {
+    //역할
     public MemberService memberService(){
-        return new MemberServiceImpl(new MemoryMemberRepository());
+        return new MemberServiceImpl(memberRepository());
     }
 
+    //역할
     public OrderService orderService(){
-        return new OrderServiceImpl(new MemoryMemberRepository(), new FixDiscountPolicy());
+        return new OrderServiceImpl(memberRepository(), discountPolicy());
+    }
+
+    //객체
+    private MemoryMemberRepository memberRepository() {
+        return new MemoryMemberRepository();
+    }
+    //객체
+    private FixDiscountPolicy discountPolicy() {
+        return new FixDiscountPolicy();
     }
 }
